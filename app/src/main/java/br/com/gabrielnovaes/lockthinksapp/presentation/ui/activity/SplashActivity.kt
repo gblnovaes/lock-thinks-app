@@ -1,7 +1,7 @@
 package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import br.com.gabrielnovaes.lockthinksapp.R
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private val splashDuration = 2000L
@@ -20,13 +21,11 @@ class SplashActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash)
 
+        window.navigationBarColor = resources.getColor(R.color.black, theme)
+
         Handler(Looper.getMainLooper()).postDelayed({
-             startActivity(Intent(this, MainActivity::class.java))
+             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }, splashDuration)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.navigationBarColor = resources.getColor(R.color.black, theme)
-        }
     }
 }
