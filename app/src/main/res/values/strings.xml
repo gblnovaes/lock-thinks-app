@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LockThinksApp</string>
+    <string name="lock_thinks_logo">Lock Thinks App Logo</string>
 </resources>
