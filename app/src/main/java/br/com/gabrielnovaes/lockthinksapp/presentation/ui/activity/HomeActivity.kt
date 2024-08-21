@@ -3,12 +3,15 @@ package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import br.com.gabrielnovaes.lockthinksapp.R
 import br.com.gabrielnovaes.lockthinksapp.databinding.ActivityHomeBinding
+import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
 
@@ -28,8 +31,8 @@ class HomeActivity : AppCompatActivity() {
             showTagRegisterDialog()
         }
 
-        binding.lockTagBtnOpen.setOnClickListener {
-            Toast.makeText(this, "Button Open Clicked!", Toast.LENGTH_SHORT).show()
+        binding.lockTagBtnClose.setOnClickListener {
+            showSuccessSnackbarWithOkButton()
         }
     }
 
@@ -60,5 +63,26 @@ class HomeActivity : AppCompatActivity() {
         }
 
         alertDialog.show()
+    }
+
+
+    private fun showSuccessSnackbarWithOkButton() {
+        Snackbar.make(binding.root, R.string.lock_thinks_label_snack_success, Snackbar.LENGTH_LONG)
+            .setBackgroundTint(ContextCompat.getColor(this, R.color.colorSuccess))
+            .setTextColor(ContextCompat.getColor(this, R.color.white))
+            .setAction(R.string.lock_thinks_label_ok) {
+            }
+            .setActionTextColor(ContextCompat.getColor(this, R.color.white))
+            .show()
+    }
+
+    private fun showFailedSnackbarWithOkButton() {
+        Snackbar.make(binding.root, R.string.lock_thinks_label_snack_error, Snackbar.LENGTH_LONG)
+            .setBackgroundTint(ContextCompat.getColor(this, R.color.colorError))
+            .setTextColor(ContextCompat.getColor(this, R.color.white))
+            .setAction(R.string.lock_thinks_label_ok) {
+            }
+            .setActionTextColor(ContextCompat.getColor(this, R.color.white))
+            .show()
     }
 }

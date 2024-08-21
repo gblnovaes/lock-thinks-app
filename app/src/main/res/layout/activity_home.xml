@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/nfc_contact_img"
+            android:background="@drawable/lock_tag_nfc_contact_img"
             android:contentDescription="@string/lock_thinks_img_nfc_contact" />
 
         <TextView
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/lock_tag_label_open"
+            android:text="@string/lock_thinks_tag_label_open"
             android:textAllCaps="true"
             android:textSize="14sp"
             app:fontWeight="800" />
@@ -138,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/lock_tag_label_close"
+            android:text="@string/lock_thinks_tag_label_close"
             android:textAllCaps="true"
             android:textSize="14sp"
             app:fontWeight="800" />
@@ -154,7 +154,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/add_tag"
+        android:contentDescription="@string/lock_thinks_label_add_tag"
         android:src="@drawable/add_tag"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"

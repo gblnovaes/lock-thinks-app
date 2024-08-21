@@ -4,7 +4,10 @@
     <string name="lock_thinks_img_nfc_contact">Imagem Contato NFC</string>
     <string name="lock_thinks_label_tag">TAG\n</string>
     <string name="lock_thinks_label_not_found">Não Registrada</string>
-    <string name="add_tag">Add Tag</string>
-    <string name="lock_tag_label_open">Abrir</string>
-    <string name="lock_tag_label_close">Fechar</string>
+    <string name="lock_thinks_label_add_tag">Add Tag</string>
+    <string name="lock_thinks_label_ok">OK</string>
+    <string name="lock_thinks_tag_label_open">Abrir</string>
+    <string name="lock_thinks_tag_label_close">Fechar</string>
+    <string name="lock_thinks_label_snack_error">Deu ruim Tente de novo !!!</string>
+    <string name="lock_thinks_label_snack_success">Abertura realizada com sucesso !!!</string>
 </resources>
