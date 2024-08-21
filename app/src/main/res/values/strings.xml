@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">LockThinksApp</string>
+    <string name="app_name">Lock Thinks App</string>
     <string name="lock_thinks_logo">Lock Thinks App Logo</string>
     <string name="lock_thinks_img_nfc_contact">Imagem Contato NFC</string>
     <string name="lock_thinks_label_tag">TAG\n</string>
     <string name="lock_thinks_label_not_found">Não Registrada</string>
     <string name="add_tag">Add Tag</string>
+    <string name="lock_tag_label_open">Abrir</string>
+    <string name="lock_tag_label_close">Fechar</string>
 </resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Registrar TAG"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontWeight="800" />
+
+    <EditText
+        android:id="@+id/dialog_input"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="TAG: Ex: ABC-123456"
+        android:inputType="text"
+        android:minHeight="56dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sair"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:backgroundTint="@android:color/transparent" />
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Registrar"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:backgroundTint="@android:color/transparent" />
+    </LinearLayout>
+
+</LinearLayout>
