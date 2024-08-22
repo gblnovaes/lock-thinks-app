@@ -24,12 +24,6 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.fab.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Fab Button Clicked!",
-                Toast.LENGTH_SHORT
-            ).show()
-
             showTagRegisterDialog()
         }
 
