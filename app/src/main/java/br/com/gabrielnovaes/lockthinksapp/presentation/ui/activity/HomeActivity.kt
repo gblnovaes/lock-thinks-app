@@ -1,18 +1,15 @@
 package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import br.com.gabrielnovaes.lockthinksapp.R
 import br.com.gabrielnovaes.lockthinksapp.databinding.ActivityHomeBinding
-import br.com.gabrielnovaes.lockthinksapp.databinding.ActivityReaderNfcBinding
 import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
