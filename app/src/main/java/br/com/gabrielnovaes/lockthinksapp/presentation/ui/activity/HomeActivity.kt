@@ -5,16 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import br.com.gabrielnovaes.lockthinksapp.R
 import br.com.gabrielnovaes.lockthinksapp.databinding.ActivityHomeBinding
+import br.com.gabrielnovaes.lockthinksapp.presentation.viewmodel.NfcTagRegisterViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+
+    private val nfcTagRegisterViewModel: NfcTagRegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,15 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, ReaderNfcActivity::class.java)
             startActivity(intent)
         }
+
+        lifecycleScope.launch {
+            nfcTagRegisterViewModel.tag.collect { text ->
+                binding.nfcTagText.text = text.joinToString("\n") { it.tag }
+            }
+        }
+
+        nfcTagRegisterViewModel.loadTexts()
+
     }
 
 
@@ -57,6 +74,9 @@ class HomeActivity : AppCompatActivity() {
         registerButton.setOnClickListener {
             val userInput = inputField.text.toString()
             println("Registro: $userInput")
+
+            nfcTagRegisterViewModel.addText(userInput)
+
             alertDialog.dismiss()
         }
 
@@ -65,7 +85,11 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun showSuccessSnackbarWithOkButton() {
-        Snackbar.make(binding.root, R.string.lock_thinks_label_snack_success, Snackbar.LENGTH_LONG)
+        Snackbar.make(
+            binding.root,
+            R.string.lock_thinks_label_snack_success,
+            Snackbar.LENGTH_LONG
+        )
             .setBackgroundTint(ContextCompat.getColor(this, R.color.colorSuccess))
             .setTextColor(ContextCompat.getColor(this, R.color.white))
             .setAction(R.string.lock_thinks_label_ok) {
@@ -75,7 +99,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showFailedSnackbarWithOkButton() {
-        Snackbar.make(binding.root, R.string.lock_thinks_label_snack_error, Snackbar.LENGTH_LONG)
+        Snackbar.make(
+            binding.root,
+            R.string.lock_thinks_label_snack_error,
+            Snackbar.LENGTH_LONG
+        )
             .setBackgroundTint(ContextCompat.getColor(this, R.color.colorError))
             .setTextColor(ContextCompat.getColor(this, R.color.white))
             .setAction(R.string.lock_thinks_label_ok) {

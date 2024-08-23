@@ -1,0 +1,21 @@
+package br.com.gabrielnovaes.lockthinksapp.di
+
+import br.com.gabrielnovaes.lockthinksapp.data.local.repository.NfcTagRepositoryImp
+import br.com.gabrielnovaes.lockthinksapp.domain.repository.NfcTagRepository
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object RepositoryModule {
+    @Provides
+    @Singleton
+    fun bindNfcTagRepository(
+        imp: NfcTagRepositoryImp
+    ): NfcTagRepository {
+        return imp
+    }
+}
