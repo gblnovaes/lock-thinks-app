@@ -1,18 +1,16 @@
 package br.com.gabrielnovaes.lockthinksapp.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
+import br.com.gabrielnovaes.lockthinksapp.data.local.NfcTagPreferencesImp
 import br.com.gabrielnovaes.lockthinksapp.data.local.database.AppDatabase
-import br.com.gabrielnovaes.lockthinksapp.data.local.repository.NfcTagRepositoryImp
 import br.com.gabrielnovaes.lockthinksapp.domain.repository.NfcTagRepository
 import br.com.gabrielnovaes.lockthinksapp.domain.usecase.AddNfcTagUseCase
 import br.com.gabrielnovaes.lockthinksapp.domain.usecase.GetNfcTagUseCase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -41,6 +39,20 @@ object AppModule {
     @Singleton
     fun provideGetNfcTagUseCase(repository: NfcTagRepository): GetNfcTagUseCase {
         return GetNfcTagUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNfcTagPreferences(
+        sharedPreferences: SharedPreferences
+    ): NfcTagPreferencesImp {
+        return NfcTagPreferencesImp(sharedPreferences)
     }
 }
 

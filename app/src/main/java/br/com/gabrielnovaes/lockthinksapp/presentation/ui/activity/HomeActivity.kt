@@ -35,8 +35,10 @@ class HomeActivity : AppCompatActivity() {
             showTagRegisterDialog()
         }
 
+        nfcTagRegisterViewModel.getStatus()
+
         binding.lockTagBtnClose.setOnClickListener {
-            showSuccessSnackbarWithOkButton()
+            nfcTagRegisterViewModel.getStatusChanged()
         }
 
         binding.lockTagBtnOpen.setOnClickListener {
@@ -44,24 +46,47 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        setupObservers()
+
+
+        nfcTagRegisterViewModel.loadTexts()
+    }
+
+    private fun setupObservers() {
+        lifecycleScope.launch {
+
+            nfcTagRegisterViewModel.isClosed.collect { status ->
+
+                if (status) {
+                    showCloseLock()
+                    nfcTagRegisterViewModel.setStatus(true)
+                } else {
+                    showOpenLock()
+                    nfcTagRegisterViewModel.setStatus(false)
+                }
+            }
+
+        }
 
         lifecycleScope.launch {
             nfcTagRegisterViewModel.isOpenLock.collect { isVisible ->
-                binding.lockTagOpen.visibility = if (isVisible) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+                binding.lockTagOpen.visibility =
+                    if (isVisible && !nfcTagRegisterViewModel.isClosed.value) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
             }
         }
 
         lifecycleScope.launch {
             nfcTagRegisterViewModel.isClosedLock.collect { isVisible ->
-                binding.lockTagClose.visibility = if (isVisible) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+                binding.lockTagClose.visibility =
+                    if (isVisible && nfcTagRegisterViewModel.isClosed.value) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
             }
 
         }
@@ -82,28 +107,25 @@ class HomeActivity : AppCompatActivity() {
 
             val currentSize = nfcTagRegisterViewModel.tagListSize.value
 
-
             if (currentSize == hasOneRegisterTag) {
                 binding.fab.visibility = View.GONE
-                nfcTagRegisterViewModel.setOpenLockVisibility(true)
-                showOpenLock()
             } else {
-                nfcTagRegisterViewModel.setTagNotRegistered(true)
                 showNotFoundTag()
             }
         }
-
-        nfcTagRegisterViewModel.loadTexts()
     }
 
     private fun showNotFoundTag() {
         nfcTagRegisterViewModel.tagNotRegistered()
+        nfcTagRegisterViewModel.setClosedLockVisibility(false)
+        nfcTagRegisterViewModel.setOpenLockVisibility(false)
         nfcTagRegisterViewModel.setTagNotRegistered(true)
     }
 
     private fun showOpenLock() {
         nfcTagRegisterViewModel.openLock()
         nfcTagRegisterViewModel.setTagNotRegistered(false)
+        nfcTagRegisterViewModel.setClosedLockVisibility(false)
         nfcTagRegisterViewModel.setOpenLockVisibility(true)
     }
 

@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import br.com.gabrielnovaes.lockthinksapp.domain.model.NfcTag
 import br.com.gabrielnovaes.lockthinksapp.domain.usecase.AddNfcTagUseCase
 import br.com.gabrielnovaes.lockthinksapp.domain.usecase.GetNfcTagUseCase
+import br.com.gabrielnovaes.lockthinksapp.domain.usecase.GetPreferencesNfcStatusUseCase
+import br.com.gabrielnovaes.lockthinksapp.domain.usecase.SaveNfcPreferencesStatusUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class NfcTagRegisterViewModel @Inject constructor(
     private val addNfcTagUseCase: AddNfcTagUseCase,
-    private val getNfcTagUseCase: GetNfcTagUseCase
+    private val getNfcTagUseCase: GetNfcTagUseCase,
+    private val getPreferencesNfcStatusUseCase: GetPreferencesNfcStatusUseCase,
+    private val saveNfcPreferencesStatusUseCase: SaveNfcPreferencesStatusUseCase
 ) : ViewModel() {
 
     private val _tagText = MutableStateFlow<List<NfcTag>>(emptyList())
@@ -34,6 +38,10 @@ class NfcTagRegisterViewModel @Inject constructor(
 
     private val _isNotTagRegistered = MutableStateFlow(false)
     val isNotTagRegistered: StateFlow<Boolean> = _isNotTagRegistered
+
+    private val _isClosed = MutableStateFlow(false)
+    val isClosed: StateFlow<Boolean> = _isClosed
+
 
     fun addText(text: String) {
         viewModelScope.launch {
@@ -76,6 +84,24 @@ class NfcTagRegisterViewModel @Inject constructor(
 
     suspend fun getSize() {
         _tagListSize.value = getNfcTagUseCase().size
-        println("TAG " + _tagListSize.value)
+        //  println("TAG " + _tagListSize.value)
     }
+
+    fun getStatus() {
+        _isClosed.value = getPreferencesNfcStatusUseCase.invoke()
+        println("STATUS " + _isClosed.value.toString())
+    }
+
+    fun setStatus(isClosed: Boolean) {
+        saveNfcPreferencesStatusUseCase.invoke(isClosed)
+        _isClosed.value = isClosed
+
+    }
+
+    fun getStatusChanged() {
+        val newStatus = !_isClosed.value
+        saveNfcPreferencesStatusUseCase.invoke(newStatus)
+        _isClosed.update { newStatus }
+    }
+
 }
