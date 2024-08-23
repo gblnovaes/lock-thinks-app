@@ -3,6 +3,7 @@ package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
@@ -24,10 +25,12 @@ class HomeActivity : AppCompatActivity() {
 
     private val nfcTagRegisterViewModel: NfcTagRegisterViewModel by viewModels()
 
+    private val hasOneRegisterTag = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.fab.setOnClickListener {
             showTagRegisterDialog()
         }
@@ -41,16 +44,75 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         lifecycleScope.launch {
-            nfcTagRegisterViewModel.tag.collect { text ->
-                binding.nfcTagText.text = text.joinToString("\n") { it.tag }
+            nfcTagRegisterViewModel.isOpenLock.collect { isVisible ->
+                binding.lockTagOpen.visibility = if (isVisible) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            nfcTagRegisterViewModel.isClosedLock.collect { isVisible ->
+                binding.lockTagClose.visibility = if (isVisible) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+            }
+
+        }
+
+        lifecycleScope.launch {
+            nfcTagRegisterViewModel.isNotTagRegistered.collect { isVisible ->
+                binding.tagNotFound.visibility = if (isVisible) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+
+            nfcTagRegisterViewModel.getSize()
+
+            val currentSize = nfcTagRegisterViewModel.tagListSize.value
+
+
+            if (currentSize == hasOneRegisterTag) {
+                binding.fab.visibility = View.GONE
+                nfcTagRegisterViewModel.setOpenLockVisibility(true)
+                showOpenLock()
+            } else {
+                nfcTagRegisterViewModel.setTagNotRegistered(true)
+                showNotFoundTag()
             }
         }
 
         nfcTagRegisterViewModel.loadTexts()
-
     }
 
+    private fun showNotFoundTag() {
+        nfcTagRegisterViewModel.tagNotRegistered()
+        nfcTagRegisterViewModel.setTagNotRegistered(true)
+    }
+
+    private fun showOpenLock() {
+        nfcTagRegisterViewModel.openLock()
+        nfcTagRegisterViewModel.setTagNotRegistered(false)
+        nfcTagRegisterViewModel.setOpenLockVisibility(true)
+    }
+
+    private fun showCloseLock() {
+        nfcTagRegisterViewModel.closedLock()
+        nfcTagRegisterViewModel.setTagNotRegistered(false)
+        nfcTagRegisterViewModel.setOpenLockVisibility(false)
+        nfcTagRegisterViewModel.setClosedLockVisibility(true)
+    }
 
     private fun showTagRegisterDialog() {
 
@@ -76,6 +138,9 @@ class HomeActivity : AppCompatActivity() {
             println("Registro: $userInput")
 
             nfcTagRegisterViewModel.addText(userInput)
+
+
+            showOpenLock()
 
             alertDialog.dismiss()
         }
