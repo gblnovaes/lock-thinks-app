@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
-    id 'androidx.room' version "2.6.1" apply false
+    id 'androidx.room'
 }
 
 android {
@@ -36,6 +36,10 @@ android {
     viewBinding {
         enabled = true
     }
+
+    room {
+        schemaDirectory "$projectDir/schemas"
+    }
 }
 
 dependencies {
@@ -44,12 +48,14 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.activity:activity:1.8.0'
+    implementation 'androidx.activity:activity-ktx:1.8.0'
 
 
     // Architecture
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.8.4"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.8.4"
+
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     // Unit Testing
@@ -68,14 +74,12 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // Dagger Hilt
-    implementation "com.google.dagger:hilt-android:2.52"
-    kapt "com.google.dagger:hilt-compiler:2.52"
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
 
     // Room Database
-    def room_version = "2.6.1"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-
+    implementation "androidx.room:room-ktx:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1"
 
 
 }
