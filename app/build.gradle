@@ -55,6 +55,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.8.4"
     kapt "androidx.lifecycle:lifecycle-compiler:2.8.4"
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 

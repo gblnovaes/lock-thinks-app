@@ -1,11 +1,15 @@
 package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,11 +23,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
     private val nfcTagRegisterViewModel: NfcTagRegisterViewModel by viewModels()
+
+    private lateinit var getResultLauncher: ActivityResultLauncher<Intent>
 
     private val hasOneRegisterTag = 1
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,13 +49,31 @@ class HomeActivity : AppCompatActivity() {
 
         binding.lockTagBtnOpen.setOnClickListener {
             val intent = Intent(this, ReaderNfcActivity::class.java)
-            startActivity(intent)
+            getResultLauncher.launch(intent)
         }
+
+        getResultLauncher()
 
         setupObservers()
 
 
         nfcTagRegisterViewModel.loadTexts()
+    }
+
+
+    private fun getResultLauncher() {
+        getResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                val returnedResult = data?.getStringExtra("reader_tag_result")
+
+                Toast.makeText(this, "Result: $returnedResult", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Result cancelled", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun setupObservers() {
@@ -157,13 +181,10 @@ class HomeActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             val userInput = inputField.text.toString()
-            println("Registro: $userInput")
-
             nfcTagRegisterViewModel.addText(userInput)
-
-
+            showSuccessSnackbarWithOkButton()
             showOpenLock()
-
+            binding.fab.visibility = View.GONE
             alertDialog.dismiss()
         }
 
