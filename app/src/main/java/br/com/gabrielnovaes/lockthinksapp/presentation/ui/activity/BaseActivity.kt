@@ -25,7 +25,6 @@ open class BaseActivity : AppCompatActivity() {
 
         if (nfcAdapter == null) {
             Toast.makeText(this, R.string.lock_thinks_nfc_not_found, Toast.LENGTH_LONG).show()
-            //finish()
             return
         }
 

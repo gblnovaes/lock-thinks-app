@@ -15,4 +15,5 @@
     <string name="lock_thinks_nfc_label_activate">NFC está desativado</string>
     <string name="lock_thinks_nfc_active_setting">Ativar NFC</string>
     <string name="lock_thinks_nfc_not_found">Este dispositivo não suporta NFC</string>
+    <string name="lock_thinks_nfc_not_approached">Nao foi detectada a aproximação</string>
 </resources>

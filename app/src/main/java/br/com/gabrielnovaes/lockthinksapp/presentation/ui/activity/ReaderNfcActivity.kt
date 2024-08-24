@@ -6,7 +6,6 @@ import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Toast
 import br.com.gabrielnovaes.lockthinksapp.databinding.ActivityReaderNfcBinding
 
 
@@ -20,7 +19,6 @@ class ReaderNfcActivity : BaseActivity() {
         binding = ActivityReaderNfcBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
 
         object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -45,7 +43,6 @@ class ReaderNfcActivity : BaseActivity() {
 
     private fun handleNfcTag(tag: Tag) {
         val tagId = tag.id.joinToString(":") { String.format("%02X", it) }
-        Toast.makeText(this, "Tag NFC detectada! ID: $tagId", Toast.LENGTH_LONG).show()
         val resultIntent = Intent()
         resultIntent.putExtra("reader_tag_result", "$tagId")
         setResult(Activity.RESULT_OK, resultIntent)

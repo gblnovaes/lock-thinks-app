@@ -3,6 +3,7 @@ package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -16,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import br.com.gabrielnovaes.lockthinksapp.R
 import br.com.gabrielnovaes.lockthinksapp.databinding.ActivityHomeBinding
+import br.com.gabrielnovaes.lockthinksapp.domain.model.NfcTag
 import br.com.gabrielnovaes.lockthinksapp.presentation.viewmodel.NfcTagRegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,10 +62,10 @@ class HomeActivity : BaseActivity() {
             return
         }
 
-        getResultLauncher()
-
         setupObservers()
 
+
+        getResultLauncher()
 
         nfcTagRegisterViewModel.loadTexts()
     }
@@ -77,9 +79,25 @@ class HomeActivity : BaseActivity() {
                 val data = result.data
                 val returnedResult = data?.getStringExtra("reader_tag_result")
 
-                Toast.makeText(this, "Result: $returnedResult", Toast.LENGTH_LONG).show()
+                val tag = nfcTagRegisterViewModel.tag.value.map {
+                    NfcTag(
+                        it.id,
+                        it.tag
+                    )
+                }
+
+                if (returnedResult == tag.first().tag) {
+                    lifecycleScope.launch {
+                        showOpenLock()
+                        nfcTagRegisterViewModel.setStatus(false)
+                    }
+                }
             } else {
-                Toast.makeText(this, "Result cancelled", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    R.string.lock_thinks_nfc_not_approached,
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
