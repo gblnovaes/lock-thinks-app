@@ -1,6 +1,6 @@
 # Lista de Tarefas para o Aplicativo NFC Lock Thinks
 
-### Link do Figma do Prototipo: 
+### Link do Figma: 
 https://www.figma.com/design/FGS59AEWwz0hDebFaCu7jK/Lock-Thinks-APP?node-id=5-31&t=h2UxV33NMNuWyINp-1
 
 ### 1. Tela Inicial
