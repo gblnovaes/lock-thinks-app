@@ -1,5 +1,8 @@
 # Lista de Tarefas para o Aplicativo NFC Lock Thinks
 
+### Link do Figma: 
+https://www.figma.com/design/FGS59AEWwz0hDebFaCu7jK/Lock-Thinks-APP?node-id=5-31&t=h2UxV33NMNuWyINp-1
+
 ### 1. Tela Inicial
 - **Criar a tela inicial do aplicativo.**
   - [x] Implementar um botão na tela inicial chamado **"Atribuir chave ao cadeado"**.
@@ -22,7 +25,7 @@
 ### 5. Validação e Abertura do Cadeado
 - **Validar a tag NFC e realizar a abertura do cadeado.**
   - [x] Ao aproximar a tag NFC correta, o cadeado deve abrir e exibir uma mensagem de sucesso: **"Cadeado aberto com sucesso!"**.
-  - [x] Se a tag NFC for incorreta, o app deve emitir um som de erro e exibir a mensagem **"Chave incorreta!"**.
+  - [ ] Se a tag NFC for incorreta, o app deve emitir um som de erro e exibir a mensagem **"Chave incorreta!"**.
 
 ### 6. Contador Regressivo para Abertura do Cadeado
 - **Implementar um contador regressivo para a abertura do cadeado.**
