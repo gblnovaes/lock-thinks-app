@@ -8,7 +8,7 @@
     <string name="lock_thinks_label_ok">OK</string>
     <string name="lock_thinks_tag_label_open">Abrir</string>
     <string name="lock_thinks_tag_label_close">Fechar</string>
-    <string name="lock_thinks_label_snack_error">Deu ruim Tente de novo !!!</string>
+    <string name="lock_thinks_label_snack_error">Tag nao encontrada tente novamentente</string>
     <string name="lock_thinks_label_snack_success">Operação realizada com sucesso !!!</string>
     <string name="lock_thinks_label_come_closer">Aproxime-se da Tag</string>
     <string name="lock_thinks_label_come_closer_to_reader">Para efetuar  a leitura\n</string>

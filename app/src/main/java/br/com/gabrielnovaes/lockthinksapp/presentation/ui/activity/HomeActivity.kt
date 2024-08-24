@@ -91,6 +91,8 @@ class HomeActivity : BaseActivity() {
                         showOpenLock()
                         nfcTagRegisterViewModel.setStatus(false)
                     }
+                } else {
+                    showFailedSnackbarWithOkButton()
                 }
             } else {
                 Toast.makeText(
