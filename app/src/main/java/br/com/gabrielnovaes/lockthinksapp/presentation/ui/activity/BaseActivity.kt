@@ -14,7 +14,8 @@ import com.google.android.material.snackbar.Snackbar
 
 open class BaseActivity : AppCompatActivity() {
 
-    private var nfcAdapter: NfcAdapter? = null
+    var nfcAdapter: NfcAdapter? = null
+
     private var pendingIntent: PendingIntent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ open class BaseActivity : AppCompatActivity() {
 
         if (nfcAdapter == null) {
             Toast.makeText(this, R.string.lock_thinks_nfc_not_found, Toast.LENGTH_LONG).show()
-            finish()
+            //finish()
             return
         }
 

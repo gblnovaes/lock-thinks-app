@@ -173,4 +173,42 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />
+
+
+    <LinearLayout
+
+        android:id="@+id/nfc_not_available"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/nfc_not_available_img"
+            android:layout_width="290dp"
+            android:layout_height="175dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/lock_tag_nfc_contact_img"
+            android:contentDescription="@string/lock_thinks_img_nfc_contact"
+            android:minWidth="290dp"
+            android:minHeight="175dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/lock_thinks_nfc_not_found"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:fontWeight="800" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import br.com.gabrielnovaes.lockthinksapp.R
@@ -50,6 +49,15 @@ class HomeActivity : BaseActivity() {
         binding.lockTagBtnOpen.setOnClickListener {
             val intent = Intent(this, ReaderNfcActivity::class.java)
             getResultLauncher.launch(intent)
+        }
+
+        if (nfcAdapter == null) {
+            binding.fab.visibility = View.GONE
+            binding.nfcNotAvailable.visibility = View.VISIBLE
+            nfcTagRegisterViewModel.setClosedLockVisibility(false)
+            nfcTagRegisterViewModel.setTagNotRegistered(false)
+            nfcTagRegisterViewModel.setOpenLockVisibility(false)
+            return
         }
 
         getResultLauncher()
