@@ -3,6 +3,7 @@ package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
+import android.media.MediaPlayer
 import android.nfc.NfcAdapter
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +16,9 @@ import com.google.android.material.snackbar.Snackbar
 open class BaseActivity : AppCompatActivity() {
 
     var nfcAdapter: NfcAdapter? = null
+
+    private var mediaPlayer: MediaPlayer? = null
+
 
     private var pendingIntent: PendingIntent? = null
 
@@ -70,6 +74,18 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         snackbar.show()
+    }
+
+    fun playErrorSound() {
+        mediaPlayer?.release()
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.error_warning)
+
+        mediaPlayer?.start()
+
+        mediaPlayer?.setOnCompletionListener {
+            it.release()
+        }
     }
 
 }

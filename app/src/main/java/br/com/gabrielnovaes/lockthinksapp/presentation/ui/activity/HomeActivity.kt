@@ -3,7 +3,6 @@ package br.com.gabrielnovaes.lockthinksapp.presentation.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -91,7 +90,9 @@ class HomeActivity : BaseActivity() {
                         showOpenLock()
                         nfcTagRegisterViewModel.setStatus(false)
                     }
+
                 } else {
+                    playErrorSound()
                     showFailedSnackbarWithOkButton()
                 }
             } else {
@@ -175,10 +176,12 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun showOpenLock() {
+
         nfcTagRegisterViewModel.openLock()
         nfcTagRegisterViewModel.setTagNotRegistered(false)
         nfcTagRegisterViewModel.setClosedLockVisibility(false)
         nfcTagRegisterViewModel.setOpenLockVisibility(true)
+
     }
 
     private fun showCloseLock() {
