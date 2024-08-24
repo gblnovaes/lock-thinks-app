@@ -22,7 +22,7 @@
 ### 5. Validação e Abertura do Cadeado
 - **Validar a tag NFC e realizar a abertura do cadeado.**
   - [x] Ao aproximar a tag NFC correta, o cadeado deve abrir e exibir uma mensagem de sucesso: **"Cadeado aberto com sucesso!"**.
-  - [x] Se a tag NFC for incorreta, o app deve emitir um som de erro e exibir a mensagem **"Chave incorreta!"**.
+  - [] Se a tag NFC for incorreta, o app deve emitir um som de erro e exibir a mensagem **"Chave incorreta!"**.
 
 ### 6. Contador Regressivo para Abertura do Cadeado
 - **Implementar um contador regressivo para a abertura do cadeado.**
