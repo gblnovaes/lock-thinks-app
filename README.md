@@ -1,5 +1,8 @@
 # Lista de Tarefas para o Aplicativo NFC Lock Thinks
 
+### Link do Figma do Prototipo: 
+https://www.figma.com/design/FGS59AEWwz0hDebFaCu7jK/Lock-Thinks-APP?node-id=5-31&t=h2UxV33NMNuWyINp-1
+
 ### 1. Tela Inicial
 - **Criar a tela inicial do aplicativo.**
   - [x] Implementar um botão na tela inicial chamado **"Atribuir chave ao cadeado"**.
