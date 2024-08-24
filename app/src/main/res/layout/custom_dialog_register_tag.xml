@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Registrar TAG"
+        android:text="Atribuir chave ao cadeado"
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -21,7 +21,7 @@
         android:id="@+id/dialog_input"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:hint="TAG: Ex: ABC-123456"
+        android:hint="TAG: Ex: 37:C6:F8:5D"
         android:inputType="text"
         android:minHeight="56dp" />
 
