@@ -31,3 +31,38 @@ https://www.figma.com/design/FGS59AEWwz0hDebFaCu7jK/Lock-Thinks-APP?node-id=5-31
 - **Implementar um contador regressivo para a abertura do cadeado.**
   - [x] Adicionar um contador regressivo de 30 segundos após a solicitação de abertura do cadeado.
   - [x] Se o tempo se esgotar sem que a tag correta seja apresentada, cancelar a ação de abertura do cadeado.
+
+## Estrutura da Arquitetura
+
+### 1. MVVM (Model-View-ViewModel)
+A arquitetura MVVM foi escolhida para separar claramente a lógica de apresentação (View) da lógica de negócios (Model) e da lógica de interação (ViewModel). Abaixo está uma breve explicação das responsabilidades de cada componente:
+
+- **Model**: Representa a camada de dados, incluindo fontes locais (banco de dados) e remotas (APIs). Exemplo: `Repository`, `DataSource`.
+  
+- **View**: A interface do usuário, que observa o ViewModel e reflete as mudanças no estado da UI. Exemplo: `Activity`, `Fragment`.
+  
+- **ViewModel**: Intermediário que fornece dados da Model à View e contém a lógica de apresentação. Mantém o estado da UI e reage às interações do usuário.
+
+### 2. Clean Code e SOLID
+Para garantir que o código seja sustentável e fácil de manter, aplicamos os princípios de Clean Code e SOLID:
+
+- **S**: **Single Responsibility Principle** - Cada classe tem uma única responsabilidade.
+  
+- **O**: **Open/Closed Principle** - O código está aberto para extensão, mas fechado para modificação.
+  
+- **L**: **Liskov Substitution Principle** - As subclasses devem ser substituíveis por suas superclasses.
+  
+- **I**: **Interface Segregation Principle** - Múltiplas interfaces específicas são melhores do que uma interface geral.
+  
+- **D**: **Dependency Inversion Principle** - Módulos de alto nível não devem depender de módulos de baixo nível, ambos devem depender de abstrações.
+
+### 3. Injeção de Dependência com Dagger Hilt
+Dagger Hilt foi utilizado para gerenciar a injeção de dependência, simplificando o fornecimento e a configuração de dependências dentro do aplicativo:
+
+### 4. Leitura de NFC com Componentes Nativos
+A integração de NFC foi realizada utilizando componentes nativos do Android:
+
+- **NfcAdapter**: Para detectar a presença de dispositivos NFC.
+  
+- **PendingIntent** e **IntentFilter**: Para gerenciar as intenções associadas à leitura de tags NFC.
+
