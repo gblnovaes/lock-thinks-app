@@ -3,6 +3,8 @@
 ### Link do Figma: 
 https://www.figma.com/design/FGS59AEWwz0hDebFaCu7jK/Lock-Thinks-APP?node-id=5-31&t=h2UxV33NMNuWyINp-1
 
+### Link do APK no Drive
+https://drive.google.com/file/d/1qpNWJowZQuI55BlgYEV-x7vppG0UGkOO/view?usp=drive_link
 ### 1. Tela Inicial
 - **Criar a tela inicial do aplicativo.**
   - [x] Implementar um botão na tela inicial chamado **"Atribuir chave ao cadeado"**.
